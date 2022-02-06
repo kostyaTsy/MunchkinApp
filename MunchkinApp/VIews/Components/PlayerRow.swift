@@ -28,7 +28,7 @@ struct PlayerRow: View {
             Spacer()
             
             
-            // TODO: Change to buttons
+            // TODO: Fix stepper with values
             Stepper {
                 Text("")
             } onIncrement: {

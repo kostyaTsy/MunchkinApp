@@ -15,7 +15,6 @@
 		7CBFEBD427AFFC3B00F1DFC2 /* MunchkinApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7CBFEBD227AFFC3B00F1DFC2 /* MunchkinApp.xcdatamodeld */; };
 		7CBFEBDB27B01C7A00F1DFC2 /* PlayerRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBFEBDA27B01C7A00F1DFC2 /* PlayerRow.swift */; };
 		7CBFEBDD27B01DA800F1DFC2 /* AddPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBFEBDC27B01DA800F1DFC2 /* AddPlayerView.swift */; };
-		7CBFEBDF27B0499600F1DFC2 /* TopButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBFEBDE27B0499600F1DFC2 /* TopButtonsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,7 +27,6 @@
 		7CBFEBD327AFFC3B00F1DFC2 /* MunchkinApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MunchkinApp.xcdatamodel; sourceTree = "<group>"; };
 		7CBFEBDA27B01C7A00F1DFC2 /* PlayerRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerRow.swift; sourceTree = "<group>"; };
 		7CBFEBDC27B01DA800F1DFC2 /* AddPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlayerView.swift; sourceTree = "<group>"; };
-		7CBFEBDE27B0499600F1DFC2 /* TopButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopButtonsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,7 +43,6 @@
 		7CBFEBBB27AFFC3900F1DFC2 = {
 			isa = PBXGroup;
 			children = (
-				7CBFEBDE27B0499600F1DFC2 /* TopButtonsView.swift */,
 				7CBFEBC627AFFC3A00F1DFC2 /* MunchkinApp */,
 				7CBFEBC527AFFC3A00F1DFC2 /* Products */,
 			);
@@ -168,7 +165,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7CBFEBDF27B0499600F1DFC2 /* TopButtonsView.swift in Sources */,
 				7CBFEBD127AFFC3B00F1DFC2 /* Persistence.swift in Sources */,
 				7CBFEBDD27B01DA800F1DFC2 /* AddPlayerView.swift in Sources */,
 				7CBFEBCA27AFFC3A00F1DFC2 /* ContentView.swift in Sources */,

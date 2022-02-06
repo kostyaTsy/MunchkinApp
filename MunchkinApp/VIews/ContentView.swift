@@ -18,36 +18,21 @@ struct ContentView: View {
     
     @State private var playerName: String = ""
     @State private var isShowAddPlayerView: Bool = false
+    @State private var isAlertShow: Bool = false
     var body: some View {
         NavigationView {
             ZStack {
                 List {
-                    // TODO: new view to add players
-                    /*Section {
-                     HStack {
-                     //TextField("Label", text: $playerName)
-                     /*Button(action: addItem) {
-                      Text("Add player")
-                      }*/
-                     Button {
-                     print("alo")
-                     findPlayerFirstTurn()
-                     } label: {
-                     Text("First turn")
-                     }
-                     Spacer()
-                     Button {
-                     isShowAddPlayerView.toggle()
-                     } label: {
-                     Text("Add player")
-                     }
-                     
-                     }
-                     }*/
-                    ForEach(items) { item in
-                        PlayerRow(item: item)
+                    if items.count > 0 {
+                        ForEach(items) { item in
+                            PlayerRow(item: item)
+                        }
+                        .onDelete(perform: deleteItems)
                     }
-                    .onDelete(perform: deleteItems)
+                    else {
+                        //TODO: make center alignment
+                        Text("No players")
+                    }
                 }
                 .toolbar {
                     ToolbarItemGroup(placement: .navigationBarLeading) {
@@ -61,16 +46,18 @@ struct ContentView: View {
                         }
                         //Spacer()
                         Button {
-                            findPlayerFirstTurn()
+                            isAlertShow.toggle()
                         } label: {
                             VStack{
                                 Image(systemName: "dice")
                                 Text("First turn")
                             }
+                        }.alert("First move for: \(findPlayerFirstTurn())", isPresented: $isAlertShow) {
+                            Button("ok", role: .cancel) { }
                         }
                         //Spacer()
                         Button {
-                            print("")
+                            deleteAllItems()
                         } label: {
                             VStack{
                                 Image(systemName: "rectangle.on.rectangle")
@@ -82,15 +69,6 @@ struct ContentView: View {
             }.sheet(isPresented: $isShowAddPlayerView){
                 AddPlayerView().environment(\.managedObjectContext, viewContext)
             }
-            
-            
-            /*.toolbar {
-             ToolbarItem {
-             Button(action: addItem) {
-             Label("Add Item", systemImage: "plus")
-             }
-             }
-             }*/
         }
     }
     
@@ -109,11 +87,21 @@ struct ContentView: View {
         }
     }
     
-    private func findPlayerFirstTurn() {
-        print(items.count)
+    private func deleteAllItems() {
         for item in items {
-            print(item)
+            viewContext.delete(item)
         }
+        // TODO: save viewContext
+        //viewContext.delete(items[0])
+        
+    }
+    
+    private func findPlayerFirstTurn() -> String {
+        if items.count > 0 {
+            let randomPlayerInd = Int.random(in: 0..<items.count)
+            return items[randomPlayerInd].name ?? "No player's name"
+        }
+        return "No players"
     }
 }
 
