@@ -92,6 +92,12 @@ struct ContentView: View {
             viewContext.delete(item)
         }
         // TODO: save viewContext
+        do {
+            try viewContext.save()
+        } catch {
+            let nsError = error as NSError
+            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+        }
         //viewContext.delete(items[0])
         
     }

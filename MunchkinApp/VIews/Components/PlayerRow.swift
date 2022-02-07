@@ -8,16 +8,20 @@
 import SwiftUI
 
 struct PlayerRow: View {
+    @Environment(\.managedObjectContext) var viewContext
     @StateObject var item: Item
     
     var body: some View {
         HStack {
             // TODO: add new icons
-            Image(systemName: item.sex == "man" ? "person" : "person.fill")
-                .onTapGesture {
-                    item.sex = item.sex == "man" ? "woman" : "man"
-                }
-                .foregroundColor(.orange)
+            VStack {
+                Image(systemName: item.sex == "man" ? "person" : "person.fill")
+                    .onTapGesture {
+                        item.sex = item.sex == "man" ? "woman" : "man"
+                    }
+                    .foregroundColor(.orange)
+                Text(item.sex ?? "No sex")
+            }
             VStack(alignment: .leading) {
                 Text(item.name ?? "Player")
                     .font(.title2)
@@ -32,9 +36,26 @@ struct PlayerRow: View {
             Stepper {
                 Text("")
             } onIncrement: {
-                item.level += 1
+                if item.level < 10 {
+                    item.level += 1
+                }
+                do {
+                    try viewContext.save()
+                } catch {
+                    let nsError = error as NSError
+                    fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+                }
+                
             } onDecrement: {
-                item.level -= 1
+                if item.level > 1 {
+                    item.level -= 1
+                }
+                do {
+                    try viewContext.save()
+                } catch {
+                    let nsError = error as NSError
+                    fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+                }
             }
         }
     }

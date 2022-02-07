@@ -10,7 +10,6 @@ import CoreData
 
 struct AddPlayerView: View {
     @Environment(\.managedObjectContext) var viewContext
-    //var viewContext: NSManagedObjectContext
     @Environment(\.dismiss) var dismiss
     
     
@@ -47,7 +46,7 @@ struct AddPlayerView: View {
         withAnimation {
             let newItem = Item(context: viewContext)
             newItem.name = playerName
-            newItem.sex = "men"
+            newItem.sex = "man"
             newItem.level = 1
             
             playerName = ""
