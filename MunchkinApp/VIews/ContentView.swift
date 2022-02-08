@@ -28,9 +28,10 @@ struct ContentView: View {
                             PlayerRow(item: item)
                         }
                         .onDelete(perform: deleteItems)
+                        //TODO: edit row
+                        // on long tap gesture
                     }
                     else {
-                        //TODO: make center alignment
                         Text("No players")
                     }
                 }
@@ -53,7 +54,7 @@ struct ContentView: View {
                                 Text("First turn")
                             }
                         }.alert("First move for: \(findPlayerFirstTurn())", isPresented: $isAlertShow) {
-                            Button("ok", role: .cancel) { }
+                            Button("Ok", role: .cancel) { }
                         }
                         //Spacer()
                         Button {
@@ -79,8 +80,6 @@ struct ContentView: View {
             do {
                 try viewContext.save()
             } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
                 let nsError = error as NSError
                 fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
             }
@@ -91,7 +90,6 @@ struct ContentView: View {
         for item in items {
             viewContext.delete(item)
         }
-        // TODO: save viewContext
         do {
             try viewContext.save()
         } catch {

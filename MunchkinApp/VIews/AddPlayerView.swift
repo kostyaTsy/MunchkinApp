@@ -12,7 +12,6 @@ struct AddPlayerView: View {
     @Environment(\.managedObjectContext) var viewContext
     @Environment(\.dismiss) var dismiss
     
-    
     @State var playerName: String = ""
     var body: some View {
         VStack (alignment: .leading) {
@@ -22,6 +21,7 @@ struct AddPlayerView: View {
                 .padding()
             TextField("Player name", text: $playerName)
                 .textFieldStyle(.roundedBorder)
+                .disableAutocorrection(true)
             
             Button {
                 if playerName != "" {

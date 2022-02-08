@@ -15,12 +15,14 @@ struct PlayerRow: View {
         HStack {
             // TODO: add new icons
             VStack {
-                Image(systemName: item.sex == "man" ? "person" : "person.fill")
+                Image(item.sex == "man" ? "man" : "woman")
+                    .resizable()
+                    .frame(width: 30, height: 30)
                     .onTapGesture {
                         item.sex = item.sex == "man" ? "woman" : "man"
+                        print("icon \(item.sex!)")
                     }
-                    .foregroundColor(.orange)
-                Text(item.sex ?? "No sex")
+                
             }
             VStack(alignment: .leading) {
                 Text(item.name ?? "Player")
@@ -32,30 +34,38 @@ struct PlayerRow: View {
             Spacer()
             
             
-            // TODO: Fix stepper with values
             Stepper {
                 Text("")
             } onIncrement: {
-                if item.level < 10 {
-                    item.level += 1
-                }
-                do {
-                    try viewContext.save()
-                } catch {
-                    let nsError = error as NSError
-                    fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-                }
-                
+                incrementLevel()
             } onDecrement: {
-                if item.level > 1 {
-                    item.level -= 1
-                }
-                do {
-                    try viewContext.save()
-                } catch {
-                    let nsError = error as NSError
-                    fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-                }
+                decrementLevel()
+            }
+            .padding(.trailing, 40)
+            .scaleEffect(1.3)
+        }
+    }
+    
+    private func incrementLevel() {
+        if item.level < 10 {
+            item.level += 1
+            do {
+                try viewContext.save()
+            } catch {
+                let nsError = error as NSError
+                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+            }
+        }
+    }
+    
+    private func decrementLevel() {
+        if item.level > 1 {
+            item.level -= 1
+            do {
+                try viewContext.save()
+            } catch {
+                let nsError = error as NSError
+                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
             }
         }
     }
