@@ -7,13 +7,18 @@
 
 import SwiftUI
 
+struct WinnerInfo {
+    var isWinner: Bool = false
+    var winnerName: String = ""
+}
+
 struct PlayerRow: View {
     @Environment(\.managedObjectContext) var viewContext
     @StateObject var item: Item
     
+    @Binding var winnerInfo: WinnerInfo
     var body: some View {
         HStack {
-            // TODO: add new icons
             VStack {
                 Image(item.sex == "man" ? "man" : "woman")
                     .resizable()
@@ -31,9 +36,9 @@ struct PlayerRow: View {
                 Text("level: \(item.level)")
                     .font(.body)
             }
+            
             Spacer()
-            
-            
+
             Stepper {
                 Text("")
             } onIncrement: {
@@ -55,6 +60,10 @@ struct PlayerRow: View {
                 let nsError = error as NSError
                 fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
             }
+        }
+        if item.level == 10 {
+            winnerInfo.isWinner = true
+            winnerInfo.winnerName = item.name ?? "No player's name"
         }
     }
     

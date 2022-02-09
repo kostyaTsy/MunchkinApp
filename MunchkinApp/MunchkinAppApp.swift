@@ -13,7 +13,7 @@ struct MunchkinAppApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(winnerInfo: WinnerInfo())
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }

@@ -9,6 +9,7 @@ import SwiftUI
 import CoreData
 
 struct ContentView: View {
+    // context that stored data about players
     @Environment(\.managedObjectContext) var viewContext
     
     @FetchRequest(
@@ -17,19 +18,24 @@ struct ContentView: View {
     private var items: FetchedResults<Item>
     
     @State private var playerName: String = ""
+    
+    // State var for show views or alerts
     @State private var isShowAddPlayerView: Bool = false
     @State private var isAlertShow: Bool = false
+    @State var winnerInfo: WinnerInfo
     var body: some View {
         NavigationView {
             ZStack {
                 List {
                     if items.count > 0 {
                         ForEach(items) { item in
-                            PlayerRow(item: item)
+                            PlayerRow(item: item, winnerInfo: $winnerInfo)
+                                .alert("Winner is: \(winnerInfo.winnerName)", isPresented: $winnerInfo.isWinner) {
+                                    Button("Ok", role: .cancel) {}
+                                }    
                         }
                         .onDelete(perform: deleteItems)
                         //TODO: edit row
-                        // on long tap gesture
                     }
                     else {
                         Text("No players")
@@ -111,6 +117,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+        ContentView(winnerInfo: WinnerInfo(isWinner: false, winnerName: "")).environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }
