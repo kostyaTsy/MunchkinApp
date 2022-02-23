@@ -25,9 +25,7 @@ struct PlayerRow: View {
                     .frame(width: 30, height: 30)
                     .onTapGesture {
                         item.sex = item.sex == "man" ? "woman" : "man"
-                        print("icon \(item.sex!)")
                     }
-                
             }
             VStack(alignment: .leading) {
                 Text(item.name ?? "Player")
@@ -51,6 +49,8 @@ struct PlayerRow: View {
         }
     }
     
+    // Incrementing level of current player
+    // Saving(resaving) changed player
     private func incrementLevel() {
         if item.level < 10 {
             item.level += 1
@@ -67,6 +67,8 @@ struct PlayerRow: View {
         }
     }
     
+    // Decrementing level of current player
+    // Saving(resaving) changed player
     private func decrementLevel() {
         if item.level > 1 {
             item.level -= 1

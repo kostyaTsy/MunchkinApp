@@ -10,6 +10,7 @@ import CoreData
 
 struct AddPlayerView: View {
     @Environment(\.managedObjectContext) var viewContext
+    // Closing sheet view
     @Environment(\.dismiss) var dismiss
     
     @State var playerName: String = ""
@@ -22,7 +23,6 @@ struct AddPlayerView: View {
             TextField("Player name", text: $playerName)
                 .textFieldStyle(.roundedBorder)
                 .disableAutocorrection(true)
-            
             Button {
                 if playerName != "" {
                     addItem()
@@ -42,6 +42,7 @@ struct AddPlayerView: View {
         .padding()
     }
     
+    // Adding item to context
     private func addItem() {
         withAnimation {
             let newItem = Item(context: viewContext)
@@ -62,10 +63,3 @@ struct AddPlayerView: View {
     }
 }
 
-/*struct AddPlayerView_Previews: PreviewProvider {
-    static var previews: some View {
-        AddPlayerView()
-            .preferredColorScheme(.light)
-.previewInterfaceOrientation(.portrait)
-    }
-}*/
